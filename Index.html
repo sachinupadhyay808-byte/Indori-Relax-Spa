@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indori Relax Home Services - Premium Spa & Massage At Your Doorstep</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f0d878;
+            --gold-dark: #b8960c;
+            --black: #0a0a0a;
+            --dark: #1a1a1a;
+            --darker: #111111;
+            --cream: #f5f0e8;
+            --white: #ffffff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+        @keyframes pulse-gold { 0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); } 50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes glow { 0%, 100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); } 50% { text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.4); } }
+        @keyframes borderGlow { 0%, 100% { border-color: rgba(212, 175, 55, 0.3); } 50% { border-color: rgba(212, 175, 55, 0.8); } }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+        .top-bar { background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark)); padding: 8px 0; text-align: center; font-size: 13px; font-weight: 600; letter-spacing: 1px; color: var(--black); animation: shimmer 3s infinite linear; background-size: 200% auto; }
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(212, 175, 55, 0.2); transition: all 0.3s ease; }
+        header.scrolled { background: rgba(10, 10, 10, 0.98); box-shadow: 0 5px 30px rgba(0,0,0,0.5); }
+        .header-inner { max-width: 1400px; margin: 0 auto; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--black); animation: pulse-gold 2s infinite; }
+        .logo-text { font-family: 'Playfair Display', serif; }
+        .logo-text h1 { font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: 2px; line-height: 1; }
+        .logo-text span { font-size: 11px; color: var(--gold-light); letter-spacing: 3px; text-transform: uppercase; }
+        nav ul { display: flex; list-style: none; gap: 35px; }
+        nav a { color: var(--white); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 1px; position: relative; transition: color 0.3s; }
+        nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.3s; }
+        nav a:hover { color: var(--gold); }
+        nav a:hover::after { width: 100%; }
+        .header-cta { display: flex; align-items: center; gap: 20px; }
+        .phone-btn { display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--black); padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.3s; animation: pulse-gold 2s infinite; }
+        .phone-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4); }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding-top: 80px; }
+        .hero-bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1920') center/cover; filter: brightness(0.3); }
+        .hero-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%); }
+        .hero-particles { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; }
+        .particle { position: absolute; width: 4px; height: 4px; background: var(--gold); border-radius: 50%; opacity: 0.3; animation: float 6s infinite ease-in-out; }
+        .hero-content { position: relative; z-index: 2; text-align: center; max-width: 900px; padding: 0 30px; animation: fadeInUp 1s ease; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold); padding: 8px 25px; border-radius: 50px; font-size: 13px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; animation: fadeIn 1s ease 0.3s both; }
+        .hero-badge i { color: #ff4444; animation: pulse-gold 1s infinite; }
+        .hero h2 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 6vw, 72px); font-weight: 700; line-height: 1.1; margin-bottom: 20px; animation: fadeInUp 1s ease 0.5s both; }
+        .hero h2 .gold-text { color: var(--gold); animation: glow 2s infinite; }
+        .hero p { font-size: 18px; color: rgba(255,255,255,0.8); margin-bottom: 40px; line-height: 1.8; animation: fadeInUp 1s ease 0.7s both; }
+        .hero-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 1s ease 0.9s both; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--black); padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 16px; letter-spacing: 1px; border: none; cursor: pointer; transition: all 0.3s; animation: pulse-gold 2s infinite; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4); }
+        .btn-secondary { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--white); padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 16px; letter-spacing: 1px; border: 2px solid var(--gold); cursor: pointer; transition: all 0.3s; }
+        .btn-secondary:hover { background: var(--gold); color: var(--black); transform: translateY(-3px); }
+        .hero-stats { display: flex; justify-content: center; gap: 50px; margin-top: 60px; animation: fadeInUp 1s ease 1.1s both; }
+        .stat-item { text-align: center; }
+        .stat-number { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; color: var(--gold); line-height: 1; }
+        .stat-label { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 5px; letter-spacing: 1px; text-transform: uppercase; }
+        .cod-banner { background: linear-gradient(135deg, #1a1a1a, #2a1a1a); border: 2px solid var(--gold); border-radius: 20px; padding: 30px; margin: -40px auto 0; max-width: 1200px; position: relative; z-index: 10; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; animation: fadeInUp 1s ease 1.3s both, borderGlow 3s infinite; }
+        .cod-left { display: flex; align-items: center; gap: 20px; }
+        .cod-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; color: var(--black); animation: pulse-gold 2s infinite; }
+        .cod-text h3 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold); margin-bottom: 5px; }
+        .cod-text p { color: rgba(255,255,255,0.7); font-size: 15px; }
+        .cod-features { display: flex; gap: 30px; flex-wrap: wrap; }
+        .cod-feature { display: flex; align-items: center; gap: 10px; background: rgba(212, 175, 55, 0.1); padding: 12px 20px; border-radius: 50px; border: 1px solid rgba(212, 175, 55, 0.3); }
+        .cod-feature i { color: var(--gold); font-size: 18px; }
+        .cod-feature span { font-size: 14px; font-weight: 500; }
+        section { padding: 100px 30px; max-width: 1400px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 70px; }
+        .section-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 48px); font-weight: 700; color: var(--gold); margin-bottom: 15px; }
+        .section-header p { color: rgba(255,255,255,0.6); font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+        .section-line { width: 80px; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 20px auto 0; }
+        .gender-policy { background: linear-gradient(135deg, var(--darker), var(--dark)); border-radius: 30px; padding: 60px; margin-bottom: 80px; border: 1px solid rgba(212, 175, 55, 0.2); position: relative; overflow: hidden; }
+        .gender-policy::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%); animation: rotate 20s linear infinite; }
+        .gender-policy-content { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .gender-policy-text h3 { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--gold); margin-bottom: 20px; }
+        .gender-policy-text p { color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 30px; font-size: 16px; }
+        .gender-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .gender-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 30px; text-align: center; transition: all 0.4s; }
+        .gender-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 20px 40px rgba(212, 175, 55, 0.1); }
+        .gender-card-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: var(--black); margin: 0 auto 15px; }
+        .gender-card h4 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .gender-card p { font-size: 13px; color: rgba(255,255,255,0.6); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+        .service-card { background: linear-gradient(145deg, var(--dark), var(--darker)); border-radius: 25px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.1); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
+        .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold)); transform: scaleX(0); transition: transform 0.5s; }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-card:hover { transform: translateY(-10px); border-color: rgba(212, 175, 55, 0.3); box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 30px rgba(212, 175, 55, 0.1); }
+        .service-image { position: relative; height: 220px; overflow: hidden; }
+        .service-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .service-card:hover .service-image img { transform: scale(1.1); }
+        .service-image-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%); }
+        .service-badge { position: absolute; top: 15px; right: 15px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--black); padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: 700; }
+        .service-gender-tag { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); padding: 5px 12px; border-radius: 50px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 5px; border: 1px solid rgba(212, 175, 55, 0.3); }
+        .service-gender-tag i { color: var(--gold); }
+        .service-content { padding: 25px; }
+        .service-content h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--white); margin-bottom: 10px; }
+        .service-content p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
+        .service-pricing { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .price-option { text-align: center; }
+        .price-option .duration { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 3px; }
+        .price-option .price { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--gold); }
+        .price-option .price span { font-size: 14px; color: rgba(255,255,255,0.5); }
+        .book-btn { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--black); border: none; padding: 10px 25px; border-radius: 50px; font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 5px; }
+        .book-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4); }
+        .reviews-section { background: linear-gradient(135deg, var(--darker), var(--dark)); border-radius: 30px; padding: 80px 60px; margin: 80px auto; border: 1px solid rgba(212, 175, 55, 0.1); position: relative; overflow: hidden; }
+        .reviews-section::before { content: '"'; position: absolute; top: 20px; left: 40px; font-family: 'Playfair Display', serif; font-size: 200px; color: rgba(212, 175, 55, 0.05); line-height: 1; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; margin-top: 50px; }
+        .review-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(212, 175, 55, 0.1); border-radius: 20px; padding: 30px; transition: all 0.4s; }
+        .review-card:hover { transform: translateY(-5px); border-color: rgba(212, 175, 55, 0.3); }
+        .review-stars { color: var(--gold); margin-bottom: 15px; font-size: 14px; }
+        .review-text { color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+        .reviewer { display: flex; align-items: center; gap: 12px; }
+        .reviewer-avatar { width: 45px; height: 45px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--black); font-size: 16px; }
+        .reviewer-info h4 { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+        .reviewer-info span { font-size: 12px; color: rgba(255,255,255,0.5); }
+        .verified-badge { display: inline-flex; align-items: center; gap: 4px; background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 3px 10px; border-radius: 50px; font-size: 11px; margin-left: 10px; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .feature-card { background: linear-gradient(145deg, var(--dark), var(--darker)); border-radius: 20px; padding: 40px 30px; text-align: center; border: 1px solid rgba(212, 175, 55, 0.1); transition: all 0.4s; position: relative; overflow: hidden; }
+        .feature-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); transform: scaleX(0); transition: transform 0.4s; }
+        .feature-card:hover::after { transform: scaleX(1); }
+        .feature-card:hover { transform: translateY(-5px); border-color: rgba(212, 175, 55, 0.3); }
+        .feature-icon { width: 70px; height: 70px; background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05)); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 28px; color: var(--gold); margin: 0 auto 20px; border: 1px solid rgba(212, 175, 55, 0.2); }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+        .feature-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+        .cta-section { background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-dark)); border-radius: 30px; padding: 80px 60px; text-align: center; position: relative; overflow: hidden; margin: 80px auto; }
+        .cta-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); animation: rotate 15s linear infinite; }
+        .cta-content { position: relative; z-index: 1; }
+        .cta-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 48px); color: var(--black); margin-bottom: 15px; }
+        .cta-content p { color: rgba(0,0,0,0.7); font-size: 18px; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .cta-phone { display: inline-flex; align-items: center; gap: 15px; background: var(--black); color: var(--gold); padding: 20px 50px; border-radius: 50px; text-decoration: none; font-size: 28px; font-weight: 700; letter-spacing: 2px; transition: all 0.3s; animation: pulse-gold 2s infinite; }
+        .cta-phone:hover { transform: scale(1.05); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .cta-phone i { font-size: 24px; }
+        footer { background: var(--darker); border-top: 1px solid rgba(212, 175, 55, 0.1); padding: 60px 30px 30px; }
+        .footer-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; }
+        .footer-brand h3 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold); margin-bottom: 15px; }
+        .footer-brand p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+        .footer-social { display: flex; gap: 15px; }
+        .footer-social a { width: 40px; height: 40px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); text-decoration: none; transition: all 0.3s; }
+        .footer-social a:hover { background: var(--gold); color: var(--black); transform: translateY(-3px); }
+        .footer-links h4 { font-size: 16px; font-weight: 600; margin-bottom: 20px; color: var(--gold); }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-contact p { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 15px; }
+        .footer-contact i { color: var(--gold); width: 20px; }
+        .footer-bottom { max-width: 1400px; margin: 40px auto 0; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: rgba(255,255,255,0.4); font-size: 13px; }
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--gold); font-size: 24px; cursor: pointer; }
+        .fab { position: fixed; bottom: 30px; right: 30px; z-index: 999; }
+        .fab-main { width: 60px; height: 60px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--black); font-size: 24px; box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4); cursor: pointer; transition: all 0.3s; animation: pulse-gold 2s infinite; border: none; }
+        .fab-main:hover { transform: scale(1.1); }
+        .fab-options { position: absolute; bottom: 70px; right: 0; display: flex; flex-direction: column; gap: 10px; opacity: 0; pointer-events: none; transform: translateY(20px); transition: all 0.3s; }
+        .fab:hover .fab-options { opacity: 1; pointer-events: all; transform: translateY(0); }
+        .fab-option { display: flex; align-items: center; gap: 10px; background: var(--dark); border: 1px solid rgba(212, 175, 55, 0.3); padding: 10px 20px; border-radius: 50px; color: var(--white); text-decoration: none; font-size: 14px; white-space: nowrap; transition: all 0.3s; }
+        .fab-option:hover { background: var(--gold); color: var(--black); }
+        .fab-option i { color: var(--gold); }
+        .fab-option:hover i { color: var(--black); }
+        @media (max-width: 1024px) { .gender-policy-content { grid-template-columns: 1fr; } .footer-inner { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) { .header-inner { padding: 15px 20px; } nav { display: none; } .mobile-menu-btn { display: block; } .hero-stats { flex-direction: column; gap: 30px; } .cod-banner { flex-direction: column; text-align: center; padding: 25px; } .cod-left { flex-direction: column; } .gender-cards { grid-template-columns: 1fr; } .services-grid { grid-template-columns: 1fr; } .reviews-grid { grid-template-columns: 1fr; } .footer-inner { grid-template-columns: 1fr; gap: 30px; } section { padding: 60px 20px; } .reviews-section { padding: 50px 25px; } .cta-section { padding: 50px 25px; } .gender-policy { padding: 40px 25px; } }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <i class="fas fa-percentage"></i> SPECIAL OFFER: Get 20% OFF on your first booking! Call Now: 7869344472
+    </div>
+
+    <header id="header">
+        <div class="header-inner">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-spa"></i></div>
+                <div class="logo-text">
+                    <h1>Indori Relax</h1>
+                    <span>Home Services</span>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#why-us">Why Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-cta">
+                <a href="tel:7869344472" class="phone-btn"><i class="fas fa-phone-alt"></i> 7869344472</a>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="hero-badge"><i class="fas fa-fire"></i> Indore's #1 Home Massage Service</div>
+            <h2>Premium Spa Experience<br><span class="gold-text">At Your Doorstep</span></h2>
+            <p>Experience luxury wellness therapies in the comfort of your home. Professional therapists, premium products, and unmatched relaxation — all delivered to you in Indore.</p>
+            <div class="hero-buttons">
+                <a href="tel:7869344472" class="btn-primary"><i class="fas fa-phone-alt"></i> Book Now - Call Us</a>
+                <a href="#services" class="btn-secondary"><i class="fas fa-list"></i> View Services</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">5-Star Reviews</div></div>
+                <div class="stat-item"><div class="stat-number">15+</div><div class="stat-label">Therapies</div></div>
+                <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Satisfaction</div></div>
+                <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Available</div></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cod-banner animate-on-scroll">
+        <div class="cod-left">
+            <div class="cod-icon"><i class="fas fa-money-bill-wave"></i></div>
+            <div class="cod-text">
+                <h3>Cash On Delivery</h3>
+                <p>Pay after your service is complete. No advance payment required!</p>
+            </div>
+        </div>
+        <div class="cod-features">
+            <div class="cod-feature"><i class="fas fa-shield-alt"></i><span>100% Secure</span></div>
+            <div class="cod-feature"><i class="fas fa-check-circle"></i><span>No Hidden Charges</span></div>
+            <div class="cod-feature"><i class="fas fa-hand-holding-usd"></i><span>Pay After Service</span></div>
+        </div>
+    </div>
+
+    <section id="gender-policy">
+        <div class="gender-policy animate-on-scroll">
+            <div class="gender-policy-content">
+                <div class="gender-policy-text">
+                    <h3>Our Therapist Policy</h3>
+                    <p>At Indori Relax, we prioritize your comfort and privacy. We strictly follow a same-gender therapist policy to ensure a safe and comfortable experience for all our clients.</p>
+                    <div class="gender-cards">
+                        <div class="gender-card">
+                            <div class="gender-card-icon"><i class="fas fa-male"></i></div>
+                            <h4>Male to Male</h4>
+                            <p>Male therapists for male clients</p>
+                        </div>
+                        <div class="gender-card">
+                            <div class="gender-card-icon"><i class="fas fa-female"></i></div>
+                            <h4>Female to Female</h4>
+                            <p>Female therapists for female clients</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <img src="https://kimi-web-img.moonshot.cn/img/c8.alamy.com/714c546b1037d3a3d2c5fac79e193e876b322b6f.jpg" alt="Male to Male Massage" style="width:100%; height:200px; object-fit:cover; border-radius:15px; border: 2px solid rgba(212,175,55,0.3);">
+                    <img src="https://kimi-web-img.moonshot.cn/img/c8.alamy.com/6b32219f3d4e01f5466ce8097c60dc664fd8add0.jpg" alt="Female to Female Massage" style="width:100%; height:200px; object-fit:cover; border-radius:15px; border: 2px solid rgba(212,175,55,0.3);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="section-header animate-on-scroll">
+            <h2>Our Signature Services</h2>
+            <p>Choose from our wide range of professional wellness therapies, all available at your home in Indore</p>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/asiaspavancouver.com/36a97c0a195a0e293d62efb225b494d944010249.jpg" alt="Deep Tissue Massage">
+                    <div class="service-image-overlay"></div>
+                    <span class="service-badge">POPULAR</span>
+                    <div class="service-gender-tag"><i class="fas fa-user-shield"></i> Same Gender</div>
+                </div>
+                <div class="service-content">
+                    <h3>Deep Tissue Massage</h3>
+                    <p>Intense pressure therapy targeting deep muscle layers to relieve chronic pain and tension.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">60 min</div><div class="price">Rs 1,799</div></div>
+                        <div class="price-option"><div class="duration">90 min</div><div class="price">Rs 2,799</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+
+                        <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800" alt="Swedish Massage">
+                    <div class="service-image-overlay"></div>
+                    <span class="service-badge">RELAXING</span>
+                    <div class="service-gender-tag"><i class="fas fa-user-shield"></i> Same Gender</div>
+                </div>
+                <div class="service-content">
+                    <h3>Swedish Massage</h3>
+                    <p>Classic relaxation massage with long, flowing strokes to ease tension, improve circulation, and promote overall wellness.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">60 min</div><div class="price">Rs 1,799</div></div>
+                        <div class="price-option"><div class="duration">90 min</div><div class="price">Rs 2,599</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+
+<div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/esthetespath.com/5acbaaa9f3483b4583eb6740c6e2d56d5dc2c722.jpeg" alt="Aroma Therapy">
+                    <div class="service-image-overlay"></div>
+                    <div class="service-gender-tag"><i class="fas fa-user-shield"></i> Same Gender</div>
+                </div>
+                <div class="service-content">
+                    <h3>Aroma Therapy</h3>
+                    <p>Essential oils blended with gentle massage techniques for ultimate relaxation and stress relief.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">60 min</div><div class="price">Rs 1,699</div></div>
+                        <div class="price-option"><div class="duration">90 min</div><div class="price">Rs 2,500</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/sohumhealing.com/40246c7efefed48ff61314a0e37e71042eb2c762.jpg" alt="Ayurvedic Abhyang">
+                    <div class="service-image-overlay"></div>
+                    <span class="service-badge">TRADITIONAL</span>
+                    <div class="service-gender-tag"><i class="fas fa-user-shield"></i> Same Gender</div>
+                </div>
+                <div class="service-content">
+                    <h3>Ayurvedic Abhyang</h3>
+                    <p>Ancient Indian healing massage with warm herbal oils to balance body, mind, and spirit.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">60 min</div><div class="price">Rs 1,799</div></div>
+                        <div class="price-option"><div class="duration">90 min</div><div class="price">Rs 2,499</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/media.gettyimages.com/6de644b43f4d209e94edf4b2c318636513148421.jpg" alt="Thai Massage">
+                    <div class="service-image-overlay"></div>
+                    <div class="service-gender-tag"><i class="fas fa-user-shield"></i> Same Gender</div>
+                </div>
+                <div class="service-content">
+                    <h3>Thai Massage</h3>
+                    <p>Traditional Thai stretching and pressure point therapy for flexibility and energy flow.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">60 min</div><div class="price">Rs 2,199</div></div>
+                        <div class="price-option"><div class="duration">90 min</div><div class="price">Rs 2,999</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.lagoonspaseminyak.com/8ae4580a0120517155f7a00e6afa8987f81fa4fb.jpg" alt="Balinese Massage">
+                    <div class="service-image-overlay"></div>
+                    <div class="service-gender-tag"><i class="fas fa-user-shield"></i> Same Gender</div>
+                </div>
+                <div class="service-content">
+                    <h3>Balinese Massage</h3>
+                    <p>Full-body deep pressure massage combining gentle stretches and aromatherapy oils.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">60 min</div><div class="price">Rs 1,799</div></div>
+                        <div class="price-option"><div class="duration">90 min</div><div class="price">Rs 2,499</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.revampwellness.ca/664e7b75b8fde294769d1e7e5bd6c0df97afbdd0.webp" alt="Acupressure Massage">
+                    <div class="service-image-overlay"></div>
+                    <div class="service-gender-tag"><i class="fas fa-user-shield"></i> Same Gender</div>
+                </div>
+                <div class="service-content">
+                    <h3>Acupressure Massage</h3>
+                    <p>Pressure point therapy based on traditional Chinese medicine to restore energy balance.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">60 min</div><div class="price">Rs 1,599</div></div>
+                        <div class="price-option"><div class="duration">90 min</div><div class="price">Rs 2,299</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.naturalhealers.com/e8700b139bd1c852e9a091981ba08353c9540452.jpg" alt="Sport Massage">
+                    <div class="service-image-overlay"></div>
+                    <span class="service-badge">FOR ATHLETES</span>
+                    <div class="service-gender-tag"><i class="fas fa-user-shield"></i> Same Gender</div>
+                </div>
+                <div class="service-content">
+                    <h3>Sport Massage</h3>
+                    <p>Targeted therapy for athletes to improve performance, prevent injury, and speed recovery.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">60 min</div><div class="price">Rs 1,899</div></div>
+                        <div class="price-option"><div class="duration">90 min</div><div class="price">Rs 2,599</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/images.squarespace-cdn.com/63c87b1120e25a2e89dc7e1efb9f165842108498.jpg" alt="Couple Massage">
+                    <div class="service-image-overlay"></div>
+                    <span class="service-badge">ROMANTIC</span>
+                    <div class="service-gender-tag"><i class="fas fa-heart"></i> Couple</div>
+                </div>
+                <div class="service-content">
+                    <h3>Couple Massage</h3>
+                    <p>Side-by-side massage experience for couples with synchronized therapists and aromatherapy.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">60 min</div><div class="price">Rs 3,599</div></div>
+                        <div class="price-option"><div class="duration">90 min</div><div class="price">Rs 4,499</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/happyheadmassage.com/a5e00c77f02e33924b060acbc3d57f2e1d26ef63.jpg" alt="Head & Foot Reflexology">
+                    <div class="service-image-overlay"></div>
+                    <div class="service-gender-tag"><i class="fas fa-user-shield"></i> Same Gender</div>
+                </div>
+                <div class="service-content">
+                    <h3>Head & Foot Reflexology</h3>
+                    <p>Pressure point therapy on head and feet to relieve stress, improve circulation, and promote relaxation.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">60 min</div><div class="price">Rs 1,599</div></div>
+                        <div class="price-option"><div class="duration">90 min</div><div class="price">Rs 2,299</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/images.leadconnectorhq.com/b3cf2cb916cb67a099f76d5723a7e07b3ce8a831.png" alt="Naturopathy Massage">
+                    <div class="service-image-overlay"></div>
+                    <div class="service-gender-tag"><i class="fas fa-user-shield"></i> Same Gender</div>
+                </div>
+                <div class="service-content">
+                    <h3>Naturopathy Massage</h3>
+                    <p>Holistic healing massage combining natural therapies to detoxify and rejuvenate the body.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">60 min</div><div class="price">Rs 1,599</div></div>
+                        <div class="price-option"><div class="duration">90 min</div><div class="price">Rs 2,299</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/images.squarespace-cdn.com/329e9fe09708dff26eb3c388f1c02199db586a33.jpg" alt="Hydra Facial">
+                    <div class="service-image-overlay"></div>
+                    <span class="service-badge">PREMIUM</span>
+                    <div class="service-gender-tag"><i class="fas fa-user-shield"></i> Same Gender</div>
+                </div>
+                <div class="service-content">
+                    <h3>Hydra Facial</h3>
+                    <p>Advanced hydrating facial treatment that cleanses, exfoliates, and nourishes for glowing skin.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">90 min</div><div class="price">Rs 2,200</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/laserprofspa.com/160e9f79ee28dee71b47bcd76d9d807606bf7b82.jpg" alt="Korean Facial">
+                    <div class="service-image-overlay"></div>
+                    <div class="service-gender-tag"><i class="fas fa-user-shield"></i> Same Gender</div>
+                </div>
+                <div class="service-content">
+                    <h3>Korean Facial</h3>
+                    <p>K-Beauty inspired facial with multi-step skincare routine for radiant and youthful skin.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">90 min</div><div class="price">Rs 2,500</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.complexions.com/9ad2869b2434e922ef2e24f6df4fd3264fc86eb3.jpg" alt="Pedicure and Manicure">
+                    <div class="service-image-overlay"></div>
+                    <div class="service-gender-tag"><i class="fas fa-user-shield"></i> Same Gender</div>
+                </div>
+                <div class="service-content">
+                    <h3>Pedicure & Manicure</h3>
+                    <p>Complete nail care treatment including cuticle care, exfoliation, massage, and polish.</p>
+                    <div class="service-pricing">
+                        <div class="price-option"><div class="duration">45 min</div><div class="price">Rs 1,000</div></div>
+                        <button class="book-btn" onclick="window.location.href='tel:7869344472'"><i class="fas fa-calendar-check"></i> Book</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="reviews" style="max-width: 1400px;">
+        <div class="reviews-section animate-on-scroll">
+            <div class="section-header">
+                <h2>What Our Clients Say</h2>
+                <p>Over 50+ five-star reviews from satisfied customers across Indore</p>
+                <div class="section-line"></div>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Absolutely amazing experience! The therapist was very professional and the deep tissue massage was exactly what I needed. Best home service in Indore!"</p>
+                    <div class="reviewer"><div class="reviewer-avatar">RK</div><div class="reviewer-info"><h4>Rahul Kumar <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Deep Tissue Massage</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"The aroma therapy was so relaxing. I felt completely rejuvenated after the session. The therapist was very skilled and professional. Highly recommended!"</p>
+                    <div class="reviewer"><div class="reviewer-avatar">PS</div><div class="reviewer-info"><h4>Priya Sharma <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Aroma Therapy</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Best Ayurvedic massage I have ever had. The warm herbal oils and traditional techniques were authentic. Will definitely book again!"</p>
+                    <div class="reviewer"><div class="reviewer-avatar">AV</div><div class="reviewer-info"><h4>Amit Verma <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Ayurvedic Abhyang</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"The Thai massage was incredible! The stretching techniques really helped with my flexibility. Very professional service at home."</p>
+                    <div class="reviewer"><div class="reviewer-avatar">SM</div><div class="reviewer-info"><h4>Sanjay Mehta <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Thai Massage</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Loved the Balinese massage! The aromatherapy oils smelled divine and the pressure was perfect. Cash on delivery was very convenient."</p>
+                    <div class="reviewer"><div class="reviewer-avatar">NG</div><div class="reviewer-info"><h4>Neha Gupta <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Balinese Massage</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Acupressure massage really helped with my chronic back pain. The therapist knew exactly where to apply pressure. Excellent service!"</p>
+                    <div class="reviewer"><div class="reviewer-avatar">RP</div><div class="reviewer-info"><h4>Rajesh Patel <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Acupressure Massage</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"As a regular gym-goer, the sports massage is a game changer. Helps with muscle recovery and prevents injuries. Highly recommend!"</p>
+                    <div class="reviewer"><div class="reviewer-avatar">KS</div><div class="reviewer-info"><h4>Karan Singh <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Sport Massage</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"The couple massage was a wonderful experience for our anniversary. The therapists were perfectly synchronized. Very romantic and relaxing!"</p>
+                    <div class="reviewer"><div class="reviewer-avatar">AR</div><div class="reviewer-info"><h4>Ankit & Riya <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Couple Massage</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"The head and foot reflexology was heavenly. I felt all my stress melt away. The therapist was very gentle and professional."</p>
+                    <div class="reviewer"><div class="reviewer-avatar">DM</div><div class="reviewer-info"><h4>Divya Malhotra <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Head & Foot Reflexology</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Naturopathy massage was a unique experience. The natural healing approach really worked for my body. Will book again for sure!"</p>
+                    <div class="reviewer"><div class="reviewer-avatar">VJ</div><div class="reviewer-info"><h4>Vikram Joshi <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Naturopathy Massage</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Hydra facial left my skin glowing and hydrated. The professional equipment and products were top quality. Best facial in Indore!"</p>
+                    <div class="reviewer"><div class="reviewer-avatar">SS</div><div class="reviewer-info"><h4>Sneha Sharma <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Hydra Facial</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Korean facial was amazing! My skin looks so much brighter and youthful. The multi-step routine was very thorough. Highly recommended!"</p>
+                    <div class="reviewer"><div class="reviewer-avatar">MR</div><div class="reviewer-info"><h4>Meera Reddy <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Korean Facial</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"The pedicure and manicure service was excellent. Very hygienic and professional. My nails look beautiful! Cash on delivery was very convenient."</p>
+                    <div class="reviewer"><div class="reviewer-avatar">AK</div><div class="reviewer-info"><h4>Anjali Kapoor <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Pedicure & Manicure</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Best home spa service in Indore! The same-gender therapist policy made me feel very comfortable. Booking was easy and service was prompt."</p>
+                    <div class="reviewer"><div class="reviewer-avatar">NK</div><div class="reviewer-info"><h4>Nitin Khanna <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Deep Tissue Massage</span></div></div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"I have tried many massage services but Indori Relax is by far the best. Professional therapists, quality products, and great prices. Five stars!"</p>
+                    <div class="reviewer"><div class="reviewer-avatar">PT</div><div class="reviewer-info"><h4>Pooja Tiwari <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h4><span>Aroma Therapy</span></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-us">
+        <div class="section-header animate-on-scroll">
+            <h2>Why Choose Us</h2>
+            <p>We are committed to providing the best home spa experience in Indore</p>
+            <div class="section-line"></div>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon"><i class="fas fa-home"></i></div>
+                <h3>Home Service</h3>
+                <p>Enjoy premium spa treatments in the comfort and privacy of your own home. No need to travel anywhere.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon"><i class="fas fa-user-shield"></i></div>
+                <h3>Same Gender Policy</h3>
+                <p>We strictly follow male-to-male and female-to-female therapist policy for your comfort and safety.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon"><i class="fas fa-money-bill-wave"></i></div>
+                <h3>Cash On Delivery</h3>
+                <p>Pay only after your service is complete. No advance payment required. 100% secure and transparent.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+                <h3>Certified Therapists</h3>
+                <p>All our therapists are professionally trained and certified with years of experience in their field.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon"><i class="fas fa-spa"></i></div>
+                <h3>Premium Products</h3>
+                <p>We use only high-quality, natural, and organic products for all our treatments and therapies.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                <h3>24/7 Availability</h3>
+                <p>Book anytime, day or night. We are available round the clock to serve your wellness needs.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon"><i class="fas fa-percentage"></i></div>
+                <h3>Best Prices</h3>
+                <p>Competitive pricing with no hidden charges. Get luxury spa experience at affordable rates.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Hygiene Guaranteed</h3>
+                <p>We follow strict hygiene protocols. Fresh towels, sanitized equipment, and clean environment always.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="cta-section animate-on-scroll">
+            <div class="cta-content">
+                <h2>Book Your Relaxation Today</h2>
+                <p>Call us now to book your appointment. Our team is ready to bring the spa experience to your doorstep in Indore.</p>
+                <a href="tel:7869344472" class="cta-phone"><i class="fas fa-phone-alt"></i> 7869344472</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3>Indori Relax</h3>
+                <p>Premium home spa and massage services in Indore. Experience luxury wellness therapies at your doorstep with professional therapists and premium products.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#why-us">Why Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">Deep Tissue Massage</a></li>
+                    <li><a href="#services">Aroma Therapy</a></li>
+                    <li><a href="#services">Ayurvedic Abhyang</a></li>
+                    <li><a href="#services">Thai Massage</a></li>
+                    <li><a href="#services">Couple Massage</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone-alt"></i> 7869344472</p>
+                <p><i class="fas fa-map-marker-alt"></i> Indore, Madhya Pradesh</p>
+                <p><i class="fas fa-envelope"></i> info@indorirelax.com</p>
+                <p><i class="fas fa-clock"></i> Available 24/7</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p> 2026 Indori Relax Home Services. All rights reserved. | Indore, Madhya Pradesh</p>
+        </div>
+    </footer>
+
+    <div class="fab">
+        <div class="fab-options">
+            <a href="tel:7869344472" class="fab-option"><i class="fas fa-phone-alt"></i> Call Now</a>
+            <a href="https://wa.me/917869344472" class="fab-option"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+        <button class="fab-main"><i class="fas fa-phone-alt"></i></button>
+    </div>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+        // Particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (4 + Math.random() * 4) + 's';
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
