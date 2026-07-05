@@ -1,1 +1,179 @@
 
+st-from-twilio-rest-im_1783094370746.txt
+from fastapi import FastAPI, Request
+from twilio.rest import Client
+import openai
+import json
+from datetime import datetime
+import re
+
+app = FastAPI()
+
+# ==========================================
+# CONFIGURATION
+# ==========================================
+OPENAI_API_KEY = "your-openai-key"
+TWILIO_SID = "your-twilio-sid"
+TWILIO_TOKEN = "your-twilio-token"
+TWILIO_WHATSAPP_NUMBER = "whatsapp:+14155238886"
+
+client = Client(TWILIO_SID, TWILIO_TOKEN)
+openai.api_key = OPENAI_API_KEY
+
+BUSINESS_INFO = {
+    "name": "Indori Relax Spa",
+    "phone": "7869344472",
+    "working_hours": "10:00 AM - 10:00 PM",
+    "locations": "Indore & Nearby Areas",
+    "same_gender_policy": True,
+}
+
+# ==========================================
+# ALL 15 SERVICES WITH EXACT PRICES
+# ==========================================
+SERVICES = {
+    "1": {
+        "name": "Deep Tissue Massage",
+        "price_60": "₹1,799",
+        "price_90": "₹2,799",
+        "has_60": True,
+        "has_90": True,
+        "description": "Intense pressure for deep muscle relief"
+    },
+    "2": {
+        "name": "Aroma Therapy",
+        "price_60": "₹1,699",
+        "price_90": "₹2,500",
+        "has_60": True,
+        "has_90": True,
+        "description": "Essential oils with gentle relaxation"
+    },
+    "3": {
+        "name": "Swedish Massage",
+        "price_60": "₹1,799",
+        "price_90": "₹2,599",
+        "has_60": True,
+        "has_90": True,
+        "description": "Gentle flowing strokes for full body relaxation"
+    },
+    "4": {
+        "name": "Ayurvedic Abhyang",
+        "price_60": "₹1,799",
+        "price_90": "₹2,499",
+        "has_60": True,
+        "has_90": True,
+        "description": "Traditional Ayurvedic full body massage"
+    },
+    "5": {
+        "name": "Thai Massage",
+        "price_60": "₹2,199",
+        "price_90": "₹2,999",
+        "has_60": True,
+        "has_90": True,
+        "description": "Stretching & pressure point therapy"
+    },
+    "6": {
+        "name": "Belanis Massage",
+        "price_60": "₹1,799",
+        "price_90": "₹2,499",
+        "has_60": True,
+        "has_90": True,
+        "description": "Herbal poultice massage therapy"
+    },
+    "7": {
+        "name": "Acupressure Massage",
+        "price_60": "₹1,599",
+        "price_90": "₹2,299",
+        "has_60": True,
+        "has_90": True,
+        "description": "Pressure points for energy balance"
+    },
+    "8": {
+        "name": "Sport Massage",
+        "price_60": "₹1,899",
+        "price_90": "₹2,599",
+        "has_60": True,
+        "has_90": True,
+        "description": "For athletes & active lifestyle"
+    },
+    "9": {
+        "name": "Couple Massage",
+        "price_60": "₹3,599",
+        "price_90": "₹4,499",
+        "has_60": True,
+        "has_90": True,
+        "description": "Romantic dual massage experience"
+    },
+    "10": {
+        "name": "Head & Foot Reflexology",
+        "price_60": "₹1,599",
+        "price_90": "₹2,299",
+        "has_60": True,
+        "has_90": True,
+        "description": "Pressure therapy for head & feet"
+    },
+    "11": {
+        "name": "Naturopathy Massage",
+        "price_60": "₹1,599",
+        "price_90": "₹2,299",
+        "has_60": True,
+        "has_90": True,
+        "description": "Natural healing massage therapy"
+    },
+    "12": {
+        "name": "Hydra Facial",
+        "price_60": None,
+        "price_90": "₹2,200",
+        "has_60": False,
+        "has_90": True,
+        "duration_fixed": "90 minutes",
+        "description": "Hydrating facial treatment"
+    },
+    "13": {
+        "name": "Corean Facial",
+        "price_60": None,
+        "price_90": "₹2,500",
+        "has_60": False,
+        "has_90": True,
+        "duration_fixed": "90 minutes",
+        "description": "Korean skincare facial glow"
+    },
+    "14": {
+        "name": "Pedicure & Menycure",
+        "price_60": "₹1,000",
+        "price_90": None,
+        "has_60": True,
+        "has_90": False,
+        "duration_fixed": "45 minutes",
+        "description": "Foot & hand care treatment"
+    }
+}
+
+# LOYALTY REWARD
+LOYALTY = "🎁 *LOYALTY REWARD:*\n1 mahine mein 4 booking par\n5th booking FREE! (30 min massage)\n\n*Membership Plans Available!* 💎"
+
+# CASH ON DELIVERY HIGHLIGHT
+COD_HIGHLIGHT = "💰💰 *CASH ON DELIVERY* 💰💰\n✅ *No advance payment!*\n✅ *Pay after service!*\n✅ *100% Satisfaction Guaranteed!*"
+
+# User Sessions
+user_sessions = {}
+
+# ==========================================
+# WEBHOOK
+# ==========================================
+@app.post("/webhook")
+async def whatsapp_webhook(request: Request):
+    data = await request.form()
+    user_message = data.get('Body', '').strip()
+    from_number = data.get('From', '').replace('whatsapp:', '')
+    
+    if from_number not in user_sessions:
+        user_sessions[from_number] = {
+            "history": [],
+            "stage": "greeting",
+            "name": None,
+            "gender": None,
+            "service": None,
+            "duration": None,
+            "price": None,
+            "date...
